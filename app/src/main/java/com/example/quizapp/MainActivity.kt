@@ -4,8 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 
-import com.example.quizapp
-.databinding.ActivityMainBinding
+import com.example.quizapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
