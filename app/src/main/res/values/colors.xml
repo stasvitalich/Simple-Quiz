@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="TextColor">#023047</color>
     <color name="Back">#219EBC</color>
+    <color name="Exit">#FF0000</color>
 </resources>

@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 
 import com.example.quizapp.databinding.ActivityMainBinding
@@ -17,6 +18,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(s)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        var cardView = binding.cardView
+        val animation = AnimationUtils.loadAnimation(this, R.anim.cardanimation)
+        cardView.startAnimation(animation)
+
+
+        binding.buttonExit.setOnClickListener {
+            finishAndRemoveTask()
+        }
 
         var yourName = binding.textEditName
         binding.buttonStart.setOnClickListener {
