@@ -12,5 +12,7 @@ class QuizQuestionsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityQuizQuestionsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val questionsList = Constance.getQuestions()
     }
 }

@@ -5,4 +5,7 @@
     <string name="name">Name</string>
     <string name="Start">Start Quiz</string>
     <string name="Exit">X</string>
+    <string name="Question">Question</string>
+    <string name="OneOf">1/60</string>
+    <string name="Next">Далее</string>
 </resources>
