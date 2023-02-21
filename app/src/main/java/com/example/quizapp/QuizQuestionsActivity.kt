@@ -32,6 +32,7 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun setQuestion() {
 
+        defaultOptionsView()
         val mainQuestion: Question = myQuestionsList!![myCurrentPosition - 1]
         val progressBar = binding.progressBar
         var progressText = binding.textProgress
@@ -123,8 +124,51 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
             }
 
             R.id.buttonSubmit -> {
+                if (mySelectedOptionPosition == 0){
+                    myCurrentPosition ++
 
+                    when {
+                        myCurrentPosition <= myQuestionsList!!.size -> {
+                            setQuestion()
+                        }
+                        else -> {
+
+                        }
+                    }
+                } else {
+                    val question = myQuestionsList?.get(myCurrentPosition - 1)
+                    if (question!!.correctAnswer != mySelectedOptionPosition){
+                        answerView(mySelectedOptionPosition, R.drawable.wrong_option_border_bg)
+                    }
+                    answerView(question.correctAnswer, R.drawable.correct_option_border_bg)
+
+                    if (myCurrentPosition == myQuestionsList!!.size){
+                        binding.buttonSubmit.text = "Узнать результаты"
+                    } else{
+                        binding.buttonSubmit.text = "Следующий вопрос"
+                    }
+
+                    mySelectedOptionPosition = 0
+                }
             }
         }
+    }
+
+    private fun answerView(answer: Int, drawableView: Int) {
+        when (answer) {
+            1 -> {
+                binding.textOption1.background = ContextCompat.getDrawable(this, drawableView)
+            }
+            2 -> {
+                binding.textOption2.background = ContextCompat.getDrawable(this, drawableView)
+            }
+            3 -> {
+                binding.textOption3.background = ContextCompat.getDrawable(this, drawableView)
+            }
+            4 -> {
+                binding.textOption4.background = ContextCompat.getDrawable(this, drawableView)
+            }
+        }
+
     }
 }

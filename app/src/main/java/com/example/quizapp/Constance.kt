@@ -549,7 +549,7 @@ object Constance {
 
         val question50 = Question(
             50, "Кто изображён на фотографии?",
-            R.drawable.gorbachev,
+            R.drawable.si,
             "Кисида",
             "Ким Чен Ын",
             "Юн Сок Ёль",
