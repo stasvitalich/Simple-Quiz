@@ -24,16 +24,13 @@ class MainActivity : AppCompatActivity() {
         cardView.startAnimation(animation)
 
 
-        binding.buttonExit.setOnClickListener {
-            finishAndRemoveTask()
-        }
-
         var yourName = binding.textEditName
         binding.buttonStart.setOnClickListener {
             if (yourName.text?.isEmpty() == true){
                 Toast.makeText(this, "Please enter your name", Toast.LENGTH_LONG).show()
             } else{
                 val intent = Intent(this, QuizQuestionsActivity::class.java)
+                intent.putExtra(Constance.USER_NAME, yourName.text.toString())
                 startActivity(intent)
                 finish()
             }

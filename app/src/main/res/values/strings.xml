@@ -13,4 +13,5 @@
     <string name="YourName">Имя</string>
     <string name="YourFinalResult">Итоговый результат</string>
     <string name="Finish">Закончить</string>
+    <string name="Recommendation">Вы тупой</string>
 </resources>

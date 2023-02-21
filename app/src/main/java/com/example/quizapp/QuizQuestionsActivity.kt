@@ -1,5 +1,6 @@
 package com.example.quizapp
 
+import android.content.Intent
 import android.graphics.BitmapFactory.Options
 import android.graphics.Color
 import android.graphics.Typeface
@@ -15,6 +16,8 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
     private var myCurrentPosition: Int = 1
     private var myQuestionsList: ArrayList<Question>? = null
     private var mySelectedOptionPosition: Int = 0
+    private var myUserName: String? = null
+    private var myCorrectAnswers: Int = 0
 
     lateinit var binding: ActivityQuizQuestionsBinding
 
@@ -23,6 +26,8 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivityQuizQuestionsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         myQuestionsList = Constance.getQuestions()
+
+        myUserName = intent.getStringExtra(Constance.USER_NAME)
 
         setQuestion()
         //defaultOptionsView()
@@ -124,27 +129,35 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
             }
 
             R.id.buttonSubmit -> {
-                if (mySelectedOptionPosition == 0){
-                    myCurrentPosition ++
+                if (mySelectedOptionPosition == 0) {
+                    myCurrentPosition++
 
                     when {
                         myCurrentPosition <= myQuestionsList!!.size -> {
                             setQuestion()
                         }
                         else -> {
-
+                            val intent = Intent(this, ResultActivity::class.java)
+                            intent.putExtra(Constance.USER_NAME, myUserName)
+                            intent.putExtra(Constance.CORRECT_ANSWERS, myCorrectAnswers)
+                            intent.putExtra(Constance.TOTAL_QUESTIONS, myQuestionsList?.size)
+                            startActivity(intent)
+                            finish()
                         }
                     }
                 } else {
                     val question = myQuestionsList?.get(myCurrentPosition - 1)
-                    if (question!!.correctAnswer != mySelectedOptionPosition){
+                    if (question!!.correctAnswer != mySelectedOptionPosition) {
                         answerView(mySelectedOptionPosition, R.drawable.wrong_option_border_bg)
+                    } else {
+                        myCorrectAnswers++
                     }
                     answerView(question.correctAnswer, R.drawable.correct_option_border_bg)
 
-                    if (myCurrentPosition == myQuestionsList!!.size){
+                    if (myCurrentPosition == myQuestionsList!!.size) {
                         binding.buttonSubmit.text = "Узнать результаты"
-                    } else{
+                        binding.buttonSubmit.setBackgroundColor(ContextCompat.getColor(this, R.color.Back))
+                    } else {
                         binding.buttonSubmit.text = "Следующий вопрос"
                     }
 
